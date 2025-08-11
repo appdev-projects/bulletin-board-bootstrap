@@ -1,0 +1,91 @@
+<h1>
+  Active listings
+</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Body</th>
+      <th>Posted on</th>
+      <th>Expires on</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @active_listings.each do |a_listing| %>
+      <tr>
+        <td><%= a_listing.title %></td>
+        <td><%= a_listing.body %></td>
+        <td><%= a_listing.created_at.strftime("%b %e, %Y") %></td>
+        <td><%= a_listing.expires_on.strftime("%b %e, %Y") %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<hr>
+
+<h2>
+  Add a new listing
+</h2>
+
+<form action="/insert_listing" method="post">
+  <div>
+    <label for="title_box">
+      Title
+    </label>
+
+    <input type="text" id="title_box" name="query_title" placeholder="Enter a title for the listing...">
+  </div>
+
+  <div>
+    <label for="body_box">
+      Body
+    </label>
+
+    <textarea id="body_box" name="query_body" rows="3" placeholder="Enter a body for the listing..."></textarea>
+  </div>
+
+  <div>
+    <label for="expires_on_box">
+      Expires on
+    </label>
+
+    <input type="date" id="expires_on_box" name="query_expires_on">
+  </div>
+
+  <input type="hidden" id="board_id_box" name="query_board_id" value="<%= @the_board.id %>">
+
+  <button type="submit">
+    Create listing
+  </button>
+</form>
+
+<hr>
+
+<h2>
+  Expired listings
+</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Body</th>
+      <th>Posted on</th>
+      <th>Expired on</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @expired_listings.each do |a_listing| %>
+      <tr>
+        <td><%= a_listing.title %></td>
+        <td><%= a_listing.body %></td>
+        <td><%= a_listing.created_at.strftime("%b %e, %Y") %></td>
+        <td><%= a_listing.expires_on.strftime("%b %e, %Y") %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
